@@ -8,7 +8,18 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private SpriteRenderer spriteRenderer;
 
     private Rigidbody2D rb;
+    private PlayerAttack playerAttack;
     private Vector2 moveInput;
+
+    public Vector2 MoveInput => moveInput;
+
+    public Vector2 GetBackwardDirection()
+    {
+        if (spriteRenderer != null && spriteRenderer.flipX)
+            return Vector2.right;
+
+        return Vector2.left;
+    }
 
     private static readonly int HengHash = Animator.StringToHash("heng");
     private static readonly int ShuHash = Animator.StringToHash("shu");
@@ -24,10 +35,25 @@ public class PlayerMovement : MonoBehaviour
 
         if (spriteRenderer == null)
             spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+
+        playerAttack = GetComponent<PlayerAttack>();
     }
 
     private void Update()
     {
+        if (playerAttack != null && playerAttack.IsAttacking)
+        {
+            moveInput = Vector2.zero;
+
+            if (animator != null)
+            {
+                animator.SetFloat(HengHash, 0f);
+                animator.SetFloat(ShuHash, 0f);
+            }
+
+            return;
+        }
+
         moveInput.x = Input.GetAxisRaw("Horizontal");
         moveInput.y = Input.GetAxisRaw("Vertical");
 
@@ -54,6 +80,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (playerAttack != null && playerAttack.IsAttacking)
+        {
+            rb.velocity = Vector2.zero;
+            return;
+        }
+
         rb.velocity = moveInput * speed;
     }
 }

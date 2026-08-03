@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 146e7b8eb6921b04094fd43b82efb9d8, type: 3}
+  m_Name: FireballSkill
+  m_EditorClassIdentifier: 
+  activationKey: 102
+  cooldown: 1
+  firePrefab: {fileID: 6924999517681007486, guid: 428dda50a92e80a4f91ecf8be81d93f8, type: 3}
+  fireCount: 3
+  duration: 3
+  orbitRadius: 1.2
+  rotationSpeed: 180
+  damage: 20

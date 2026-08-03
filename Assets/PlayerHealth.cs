@@ -61,6 +61,15 @@ public class PlayerHealth : MonoBehaviour
             Die();
     }
 
+    public void Heal(float healAmount)
+    {
+        if (healAmount <= 0f || currentHealth <= 0f)
+            return;
+
+        currentHealth = Mathf.Min(currentHealth + healAmount, maxHealth);
+        UpdateHealthBar();
+    }
+
     private void PlayBodyFlash()
     {
         if (spriteRenderer == null)
